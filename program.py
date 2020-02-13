@@ -37,8 +37,8 @@ def AddRecord(username, distance):
     client = boto3.client('dynamodb')
     timestmp = str(datetime.datetime.now())
     print(timestmp)
-    intDist = int(distance)
-    addRecord = client.put_item(TableName='SpringRunningChallenge', Item={'Timestamp':{'S': timestmp},'SlackName-index':{'S': username },'Dist-index':{'N': intDist }})
+    intDist = str(distance)
+    addRecord = client.put_item(TableName='SpringRunningChallenge', Item={'Timestamp':{'S': timestmp},'SlackName-index':{'S': username },'DistStr-index':{'S': intDist }})
 
 
 

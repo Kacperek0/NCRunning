@@ -1,6 +1,8 @@
 import gpx_parser as parser
 import boto3
 import datetime
+import os
+import slack
 
 def ParseGPX(path):
     with open(path, "r") as gpx_file:
@@ -36,16 +38,16 @@ def AddRecord(username, distance):
 
     client = boto3.client('dynamodb')
     timestmp = str(datetime.datetime.now())
-    print(timestmp)
     intDist = str(distance)
-    addRecord = client.put_item(TableName='SpringRunningChallenge', Item={'Timestamp':{'S': timestmp},'SlackName-index':{'S': username },'DistStr-index':{'S': intDist }})
+    addRecord = client.put_item(TableName='SpringRunningChallenge', Item={'Timestamp':{'S': timestmp},'SlackName':{'S': username },'Distance':{'N': intDist }})
 
+def SlackIntegration(token):
 
-
+    client = slack.WebClient(token=os.environ[token])
 
 def Main():
     path = "/Users/Kacper/Documents/Repos/RunningCoach/20191203_165608.gpx"
-    usrNm = "Kacper"
+    usrNm = "Maciej"
 
     gpx = ParseGPX(path)
 

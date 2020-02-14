@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 gpx-parser = "~=0.0.4"
 boto3 = "~=1.11"
+slackclient = "~=2.5"
 
 [requires]
 python_version = "3.8"
